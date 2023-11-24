@@ -201,4 +201,8 @@
         print(f'Root Mean Squared Error: {rmse_multiple}')
         print(f'R-squared: {r2_multiple}')
         ```
-    - 
+    - Regression plot:
+        ```python
+        import seaborn as sns
+        sns.regplot (x="highway-mpg", y="price", data=df)
+        ```
