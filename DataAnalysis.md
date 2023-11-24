@@ -1,4 +1,4 @@
-# data wrangling:
+# Data wrangling:
 
 - Strategies for missing data:
     - Drop missing values:
@@ -98,8 +98,8 @@
         - Heatma
 - Correlation:
     - correlation between two features (engine-size and price)
-    
     - Pearson Correlation:
+        - linear rellations
         - measure strength of the correlation
             - Close to 1: Large positive relationship
             - Close to -1: LargeNegative relationship
@@ -113,12 +113,92 @@
 
         heatmap
 
-# 
+# Model Development :
 
+- goal:
+    1. Simple and Multiple Linear Regression
+    2. Model evaluation
+    3. Polynomial Rgression and Pipelines
 
-                
+- simple linear regression: the predictor (independent variable x) and the the target (dependent variable y)
+- multiple linear regression: multiple independent variable, and target variable y
 
+- Simple linear regression:
+    - predictor: variable x
+    - target: variable y
+        - linear relationship
+            - $y=b_0 + b_1 \ x $
+                - $b_0$ the intercept
+                - $b_1$ the slope
 
+- store x -> in np.array x
+- store y -> in np.array y
 
+- Process:
+    
+    - Simple Linear Regression:
 
-        
+        ```python
+        # Import necessary libraries
+        from sklearn.linear_model import LinearRegression
+        from sklearn.model_selection import train_test_split
+        from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+        import numpy as np
+
+        # 'df' with columns 'highway-mpg' and 'price'
+
+        # Step 1: Define predictor variable (X) and target variable (Y)
+        X = df[['highway-mpg']]
+        Y = df['price']
+
+        # Step 2: Perform train-test split
+        x_train, x_test, y_train, y_test = train_test_split(X, Y, test_size=0.3, random_state=0)
+
+        # Step 3: Create a linear regression object
+        lm = LinearRegression()
+
+        # Step 4: Fit the model on the training data
+        lm.fit(x_train, y_train)
+
+        # Step 5: Obtain predictions on the test data
+        predictions = lm.predict(x_test)
+
+        # Step 6: Evaluate the model
+        mae = mean_absolute_error(y_test, predictions)
+        mse = mean_squared_error(y_test, predictions)
+        rmse = np.sqrt(mse)
+        r2 = r2_score(y_test, predictions)
+
+        # Display evaluation metrics
+        print(f'Mean Absolute Error: {mae}')
+        print(f'Mean Squared Error: {mse}')
+        print(f'Root Mean Squared Error: {rmse}')
+        print(f'R-squared: {r2}')
+        ```
+
+    - Multiple Linear Regression:
+
+        ```python
+        # Assuming you have additional independent variables in the DataFrame
+
+        X_multiple = df[['highway-mpg', 'engine-size', 'horsepower']]
+        Y_multiple = df['price']
+
+        x_train_multiple, x_test_multiple, y_train_multiple, y_test_multiple = train_test_split(X_multiple, Y_multiple, test_size=0.3, random_state=0)
+
+        lm_multiple = LinearRegression()
+        lm_multiple.fit(x_train_multiple, y_train_multiple)
+        predictions_multiple = lm_multiple.predict(x_test_multiple)
+
+        mae_multiple = mean_absolute_error(y_test_multiple, predictions_multiple)
+        mse_multiple = mean_squared_error(y_test_multiple, predictions_multiple)
+        rmse_multiple = np.sqrt(mse_multiple)
+        r2_multiple = r2_score(y_test_multiple, predictions_multiple)
+
+        print("\nMultiple Linear Regression Metrics:")
+        print(f'Mean Absolute Error: {mae_multiple}')
+        print(f'Mean Squared Error: {mse_multiple}')
+        print(f'Root Mean Squared Error: {rmse_multiple}')
+        print(f'R-squared: {r2_multiple}')
+        ```
+    - 
