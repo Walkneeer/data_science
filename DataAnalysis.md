@@ -40,6 +40,7 @@
     - bins = np.linspace(min(df["price"])),max(df["price"], 4) # 3 groups
     - group_names = ["low", "Medium", "High"]
     - df["price-binned"] = pd.cut(df["price"], bins, labels= group_names, include_lowest = True)
+    
 - Categorical to Quantitative Variables:
 
     - Object or strings can be taken as an input for statistical models.
